@@ -289,6 +289,23 @@ Executable gloss-machina
         -threaded
         -rtsopts
 
+Executable gloss-machina2
+  Main-is:        Main.hs
+  hs-source-dirs: picture/MachinaTest
+
+  Build-depends:
+          base                          >= 4.8 && < 5
+        , gloss                         == 1.13.*
+
+  Default-Language:
+        Haskell2010
+
+  ghc-options:
+        -O2
+        -Wall
+        -threaded
+        -rtsopts
+
 
 Executable gloss-occlusion
   Main-is: Main.hs
