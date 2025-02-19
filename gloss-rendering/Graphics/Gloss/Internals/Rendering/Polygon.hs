@@ -7,14 +7,36 @@ import qualified Graphics.Rendering.OpenGL.GL           as GL
 
 combiner :: a -> b -> ()
 combiner _ _ = ()
-
+{-
 zipLoop :: [a] -> [(a,a)]
 zipLoop [] = []
 zipLoop (x:xs) = zip (x:xs) (xs++[x])
+-}
+-- Make a fast version by mimicking implementation of zipWith in base package
+zipLoop :: [a] -> [(a,a)]
+zipLoop [] = []
+zipLoop (x:xs) = go x xs where
+  go y [] = [(y,x)]
+  go y (z:xs) = (y,z):go z xs
+
+-- this version is faster for some reason
+zipWithLoop f = map (uncurry f) . zipLoop
+{-
 zipWithLoop :: (a->a->b) -> [a] -> [b]
 zipWithLoop _ [] = []
-zipWithLoop f (x:xs) = zipWith f (x:xs) (xs++[x])
+zipWithLoop f [x] = [f x x]
+zipWithLoop f (x:xs) = go x xs where
+  go y [z] = [f y z,f z x]
+  go y (z:rs) = f y z : go z rs
+  --zipWith f (x:xs) (xs++[x])
+  -}
 
+{-slower
+zipWithLoop :: (a->a->b) -> [a] -> [b]
+zipWithLoop f [] = []
+zipWithLoop f (x:xs) = zipWith f (x:xs) (xs++[x])
+-}
+--zipWithLoop'
 -- Test the sign of the dot product of (x2,y2) with (y1,-x1)
 direction :: (Float,Float) -> (Float,Float) -> Ordering
 direction (x1,y1) (x2,y2) = compare (x2*y1) (y2*x1)

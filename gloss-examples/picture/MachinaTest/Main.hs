@@ -20,20 +20,20 @@ frame' t = do
 
 frame :: Float -> Picture
 frame time
-        -- = Color (makeColor 1.0 1.0 1.0 0.5) $Translate time (-100)$ Polygon (circ 20000)
-        -- = Color (makeColor 1.0 1.0 1.0 0.5) $ mach time 12
-        = Color (makeColor 1.0 1.0 1.0 0.5) $Translate time (-100)$ Pictures $ replicate 100 $ Polygon (circ 1000)
+        = Color (makeColor 1.0 1.0 1.0 0.5) $Translate time (-100)$ Polygon (circ 20000)
+        -- = Color (makeColor 1.0 1.0 1.0 0.5) $ mach time 13
+        -- = Color (makeColor 1.0 1.0 1.0 0.5) $Translate time (-100)$ Pictures $ replicate 100 $ Polygon (circ 1000)
 
 {-
 fps for different program/backend combinations:
-Backend:                   Convex1  Default    Convex2
-mach time 12:              10-11     37-38      35-36
-mach time 13:               4-5       18        16-17
-Polygon (circ 20000)       10-11      60*       10-11***
+Backend:                   Convex1  Default    Convex2    Convex3
+mach time 12:              10-11     37-38      35-36      36-37
+mach time 13:               4-5       18        16-17      17-18
+Polygon (circ 20000)       10-11      60*       10-11***   10-11
 Polygon (circ 200000)       0.58     18-19      0.58***
-Polygon (circ' 200)         1.8       60*       1.8-1.9
+Polygon (circ' 200)         1.8       60*       1.8-1.9    1.8
 Polygon (circ' 20000)       lol       8-9**      lol
-rep 100 (circ 1000)         3        40-42      28-29
+rep 100 (circ 1000)         3        40-42      28-29      31-32
 
 * 60 is the cap
 ** appears GPU bound
