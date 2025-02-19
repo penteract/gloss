@@ -67,7 +67,8 @@ drawPicture state circScale picture
 
          | otherwise
          -> renderComplexPolygon path
-
+--         -> GL.renderPrimitive GL.Polygon
+--                $ vertexPFs path
         -- circle
         Circle radius
          ->  renderCircle 0 0 circScale radius 0
